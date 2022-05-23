@@ -1,21 +1,26 @@
+%% methylate all chromosomes
+
+
 %% change methylated CpG, to MpN
 % find all CG and change it to MN
 
 %data = load('Nucleosomes.mat');
 
-%fileID = fopen('sequences/not_cpg_island_200mer_seqs.txt','r');
-%fileID = fopen('optimisation/data/ChenNucleosomesALLseq.txt','r');
-%fileID = fopen('sequences/allsubsequencesnotNMI147.txt','r');
-%fileID = fopen('sequences/MouseSeq.txt','r');
-fileID = fopen('sequences/Sequences1000CpG0Length147.txt','r');
-%fileID = fopen('sequences/allsubsequencesCpGNOTintersectNMI147.txt','r');
+for ich=1:24
+
+
+name = sprintf('SkirmantasData/AllCentresCh37/allsubsequencesCh%iCpGNOTintersectNMI147.txt',ich);
+
+
+fileID = fopen(name,'r');
 D = textscan(fileID,'%s');
 fclose(fileID);
 
 a = D{1,1};
 
 %filename = 'sequences/mpn_notisland_200mer_seqs.txt';  % better to use fullfile(path,name) 
-filename = 'sequences/Sequences1000MpN0Length147.txt' ;
+name2 = sprintf('SkirmantasData/AllCentresCh37/allsubsequencesCh%iMpNNOTintersectNMI147.txt',ich);
+filename = name2;
 %filename = 'sequences/MethylatedallsubsequencesCpGNOTintersectNMI147.txt' ;
 
 
@@ -47,18 +52,5 @@ for j = 1:length(a)
    
 end
 
-        
+end
 
-
-%% when from .mat file
-% for j = 1:length(data.Seq)
-%     
-% 
-%     seq = data.Seq(j).S; 
-%     newStr = strrep(seq,'CG','MN');
-%     data.Seq(j).S = newStr;
-% end
-
-% Seq = data.Seq;
-% 
-% save('NucleosomesMethylated.mat','Seq')
