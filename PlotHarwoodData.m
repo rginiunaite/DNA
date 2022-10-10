@@ -1,9 +1,9 @@
-cpgload = load('../SkirmantasData/Harwood2019/Ch3cpg_nucl_scores.mat') 
+cpgload = load('../SkirmantasData/Harwood2019/Ch1cpg_nucl_scores.mat') 
 
 cpgdata= cpgload.bacpg;
 
 
-neitherload = load('../SkirmantasData/Harwood2019/Ch3neither_nucl_scores.mat')
+neitherload = load('../SkirmantasData/Harwood2019/Ch1neither_nucl_scores.mat')
 
 neitherdata = neitherload.neitherba;
 
@@ -19,6 +19,9 @@ yy = spline(edges(1:end-1), values(1:end),xx)  ;
 
 xxx=0:0.1:edges(end-1) ;
 yyy = spline(xx, yy,xxx);  
+
+save('chr3splinecpgxxx','xxx')
+save('chr3slinecpgyyy','yyy')
 
 figure              
 a=plot(xxx,yyy,'k','LineWidth',2)           
@@ -56,6 +59,9 @@ set(findall(gcf,'type','text'), 'FontSize', fsz, 'Color', 'k','FontName', ft)
 ytickformat('%.1f')
 
 legend([a,b],'CGI and NMI','Not CGI and not NMI')
+
+%save('chr3splineneitherxxx','xxx')
+%save('chr3slineneitheryyy','yyy')
     
 
 

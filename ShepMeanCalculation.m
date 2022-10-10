@@ -1,26 +1,27 @@
 %my_file = fopen('../SkirmantasData/Harwood2019/Ch1Harwooddata.csv');
-my_file = fopen('../SkirmantasData/Harwood2019/Ch1Harwooddata.csv');
+%my_file = fopen('../SkirmantasData/Harwood2019/Ch16Harwooddata.csv');
+my_file = fopen('../SkirmantasData/Shep2015/GM.nucpos.csv');
 
 %my_file = fopen('../SkirmantasData/Harwood2019/GSM3312888_iPS_chr1-22_138-161bp.csv');
 
 
 
-b = fscanf(my_file,'chr1 %d %d \n', [2,Inf]);% Harwood 
+b = fscanf(my_file,'chr1 %d %d %f %f %f %f %f %f %f %f %f %f  \n', [12,Inf]);% shep
 
 
 fclose(my_file);
 clear my_file
 b = b';
-N = 10*length(b);
+N = b(end-1,2);
 
 
 ba = zeros(N,1);
 for i = 1:length(b)
-   ba(b(i,1)+1:b(i,1)+10) = b(i,2);
-   %ba(b(i,1)+1:b(i,1)) = b(i,2);
+   ba(b(i,2)) = b(i,10);
+   
 end
 
-ba(ba>100) = 100;
+%ba(ba>100) = 100;
 
 nmi_file = fopen('../SkirmantasData/NMILongPaper.csv');
 %nmi_file = fopen('../SkirmantasData/Harwood2019/NMILongPaper.csv');
@@ -66,13 +67,13 @@ onlycpg = (cgai).*(~nmai);
 onlynmi = (~cgai).*(nmai);
 
 %vidurkiai
-meancpgnmi = mean(ba(logical(cgn)))
-meanneither = mean(ba(logical(neither)))
+meancpgnmi = mean(nonzeros(ba(logical(cgn))))
+meanneither = mean(nonzeros(ba(logical(neither))))
 
-meanonlycpg = mean(ba(logical(onlycpg)))
-meanonlynmi = mean(ba(logical(onlynmi)))
+meanonlycpg = mean(nonzeros(ba(logical(onlycpg))))
+meanonlynmi = mean(nonzeros(ba(logical(onlynmi))))
 std(ba(logical(cgn)))
-std(ba(logical(neither)))
+%std(ba(logical(neither)))
 std(ba(logical(cgn)))
 std(ba(logical(neither)))
 
